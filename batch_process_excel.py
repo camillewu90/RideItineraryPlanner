@@ -1,7 +1,8 @@
 import pandas as pd 
 import glob
 import os
-
+os.getcwd()
+os.chdir('D:\\RideItineraryPlanner')
 #list all the xl file names with the folder
 xls_file_names=os.listdir('theme park wait time data\\WaltDisneyWorldMagicKingdom-Florida')
 # create a list of xls file path name 
