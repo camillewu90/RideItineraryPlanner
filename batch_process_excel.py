@@ -1,6 +1,8 @@
 import pandas as pd 
 import glob
 import os
+from datetime import datetime
+
 os.getcwd()
 os.chdir('D:\\RideItineraryPlanner')
 #list all the xl file names with the folder
@@ -28,6 +30,7 @@ for xls_f in xls:
         xls_2_csv(xls_f,csv_f)
 
 csv_list=glob.glob('theme park wait time data_csv\\WaltDisneyWorldMagicKingdom-Florida\\*.csv')
+print(csv_list)
 for csv in csv_list:
     df=pd.read_csv(csv)
     df1=df.apply(lambda x: pd.Series(x.dropna().values),1)
@@ -35,3 +38,6 @@ for csv in csv_list:
     df1.columns.values[0]='Time'
     df1.to_csv(csv,index=False)
 
+e=pd.read_excel('theme park wait time data\\WaltDisneyWorldMagicKingdom-Florida\\Sep 2018 WaltDisneyWorldMagicKingdom.xlsx')
+date=e.iloc[:,1]
+datetime=pd.to_datetime(date,)
