@@ -6,6 +6,7 @@ import os
 xls_file_names=os.listdir('theme park wait time data\\WaltDisneyWorldMagicKingdom-Florida')
 # create a list of xls file path name 
 xls=glob.glob('theme park wait time data\\WaltDisneyWorldMagicKingdom-Florida\\*.xlsx')
+
 # create an empty csv file path list
 csv=[]
 
@@ -25,5 +26,11 @@ for xls_f in xls:
     for csv_f in csv:
         xls_2_csv(xls_f,csv_f)
 
-    
+csv_list=glob.glob('theme park wait time data_csv\\WaltDisneyWorldMagicKingdom-Florida\\*.csv')
+for csv in csv_list:
+    df=pd.read_csv(csv)
+    df1=df.apply(lambda x: pd.Series(x.dropna().values),1)
+    df1.columns=df.columns[:-1]
+    df1.columns.values[0]='Time'
+    df1.to_csv(csv,index=False)
 
