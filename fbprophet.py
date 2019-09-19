@@ -18,12 +18,12 @@ df.head()
 
 from fbprophet import Prophet
 m = Prophet(changepoint_prior_scale=0.01).fit(df)
-future = m.make_future_dataframe(periods=5000, freq='min')
+future = m.make_future_dataframe(periods=500000, freq='min')
 future2 = future.copy()
 future2 = future2[(future2['ds'].dt.hour <= 24) and (future2['ds'].dt.hour >= 8) ]
 fcst = m.predict(future2)
 fig = m.plot(fcst)
-fcst[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail(1000)
+fcst[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail(0)
 
 m.plot_components(fcst)
 
