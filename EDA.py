@@ -60,25 +60,9 @@ for column in df_nm.columns[1:-9]:
 #print(ride)  
     
 tm=select_ride('tomorrowland_transit_authority_peoplemover')
-fig=tm.plot(x='time',y='tomorrowland_transit_authority_peoplemover')
+fig=tm.plot(x='ds',y='y')
 fig.set_ylabel('wait time')
 plt.show()
 
 print(tm)
-from fbprophet import Prophet
-dfx=select_ride('tomorrowland_transit_authority_peoplemover')
-m = Prophet(changepoint_prior_scale=0.01).fit(dfx)
-future = m.make_future_dataframe(periods=300, freq='H')
-fcst = m.predict(future)
-fig1 = m.plot(fcst)
-fcst.tail()
-fcst[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail()
 
-
-from statsmodels.tsa.arima_model import ARMA
-
-# Instantiate the model
-model = ARMA(tm['y'].value, order=(1,1))
-
-# Fit the model
-results = model.fit()
