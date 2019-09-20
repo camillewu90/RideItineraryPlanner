@@ -24,7 +24,7 @@ if not database_exists(engine.url):
 print(database_exists(engine.url))
 
 # read a database from CSV and load it into a pandas dataframe
-mkridetimepred_data = pd.read_csv('mk_ridetime_prediction_future_only.csv')
+mkridetimepred_data = pd.read_csv('predicted_wait_time.csv')
 ## insert data into database from Python (proof of concept - this won't be useful for big data, of course)
 mkridetimepred_data.to_sql('mkridetimepred_data_table', engine, if_exists='replace')
 
@@ -34,7 +34,8 @@ con = psycopg2.connect(database = dbname, user = username, password = password)
 
 # when query date, need to type in format m/d/Y
 sql_query = """
-SELECT * FROM mkridetimepred_data_table WHERE date='9/30/2019';
+SELECT ds, astro_orbiter_yhat FROM mkridetimepred_data_table WHERE date='9/30/2019';
 """
 mkridetimepred_data_from_sql = pd.read_sql_query(sql_query,con)
 mkridetimepred_data_from_sql.head()
+mkridetimepred_data_from_sql.shape
