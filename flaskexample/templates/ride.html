@@ -69,11 +69,11 @@
      <form  action="/output" method="GET">
        <div class="form-group">
          <label for="visit_date">Visit Date:</label>
-         <input type="text" id="visit_date" name='visit_date' placeholder="e.g. 9/30/2019">
+         <input type="text" id="visit_date" name='visit_date' placeholder="e.g. ">
        </div>
        <div class="form-group">
          <label for="visit_date">Choose your ride:</label>
-         <input type="text" id="ride_name" name='ride_name' placeholder="e.g. astro_orbiter">
+         <input type="text" id="ride_name" name='ride_name' placeholder="e.g. ">
        </div>
        <div>
          <button type="submit" class="btn btn-default btn-lg">Let's find out the wait time for this ride!</button>
@@ -87,8 +87,8 @@
 
    <div class="container">
      <div class="starter-template">
-       <h3>Predicted wait time for today:</h3>
-       <p class="lead">The wait time is:</p>
+       <h3>Predicted wait time for {{ride_name}} on {{visit_date}}:</h3>
+       <p class="lead">The wait times will be:</p>
      </div>
 
      <table class="table table-hover">
@@ -103,8 +103,8 @@
 
    <div class="container">
      <div class="starter-template">
-       <h3>Another Result:</h3>
-       <p class="lead">Now we've taken the input and called a function from your package.<br>The result is {{the_result}}</p>
+       <h3>Best Time to Ride:</h3>
+       <p class="lead">The best time to hit this ride is before 8:20. </p>
      </div>
 
 

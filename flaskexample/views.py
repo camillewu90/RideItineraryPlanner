@@ -26,11 +26,11 @@ def output():
     visit_date = request.args.get('visit_date')
     ride_name = request.args.get('ride_name')
     #just select the Cesareans  from the birth dtabase for the month that the user inputs
-    query = "SELECT ds, %s_yhat FROM mkridetimepred_data_table WHERE date='%s'"%(ride_name,visit_date)
-    print(query)
-    query_results=pd.read_sql_query(query,con)
-    print(query_results)
+    df = pd.read_csv('D:\\RideItineraryPlanner\\predicted_wait_time.csv')
+    df_sub=df[df['date'].str.match(visit_date)]
+    df_subx=df_sub[['ds',ride_name]]
+    print(df_subx)
     waittimes=[]
-    for i in range(0,query_results.shape[0]):
-        waittimes.append(dict(time=query_results.iloc[i]['ds'],wait_time=query_results.iloc[i]['%s_yhat'%ride_name]))
-    return render_template("ride.html", waittimes = waittimes)
+    for i in range(0,df_subx.shape[0]):
+        waittimes.append(dict(time=df_subx.iloc[i]['ds'],wait_time=round(df_subx.iloc[i][ride_name])))
+    return render_template("ride.html", waittimes = waittimes,visit_date = visit_date,ride_name = ride_name)
